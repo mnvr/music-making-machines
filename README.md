@@ -82,3 +82,8 @@ files that the patch uses.
 tar xvzf my-patch.vcv
 more patch.json
 ```
+
+### Stop the engine
+
+There isn't a way to stop the engine, but as a workaround <kbd>Cmd - A</kbd>
+(Select all modules) and <kbd>Cmd - E</kbd> (Bypass).
