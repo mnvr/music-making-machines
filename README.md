@@ -65,3 +65,15 @@ This is not to say that music making machines were not possible before. A
 windchime is a great example of a music making machine. It uses a quantizer to
 convert the noise signal provided by wind to notes on a musical scale, with the
 wind also serving as the background noise in which the notes sit.
+
+## VCV Rack specifics
+
+### Patches are text files
+
+Almost. They're compressed folders containing the patch JSON, alongwith any wav
+files that the patch uses.
+
+```sh
+tar xvzf my-patch.vcv
+more patch.json
+```
