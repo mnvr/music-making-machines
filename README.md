@@ -15,12 +15,16 @@ and freely available ones are used.
 
 ## Meta
 
-### Setup a daily practice
+### Play
 
 Musical instruments take <i>decades</i> to learn how to operate. These
 techniques are no different. At the core of it, there really isn't much to say -
-signals modulate signals, it's signals all the way down. However, to get these
-signals to make music takes doing, there is no other substitute.
+signals modulate signals, it's signals all the way down. However there is a gulf
+between words and putting them into action that can only be crossed by doing,
+there is no other substitute.
+
+Play it with when you feel like. Or setup a daily practice routine. Lasseiz
+faire or with discipline, just play. And keep at it.
 
 ### Embrace limitations
 
@@ -58,8 +62,9 @@ are still important, but the heart of machines that make music is a sequencer.
 
 ### Sequencing the sequencer
 
-The thing that makes it easier for us to make music making machines (as compared
-to making music) is the fact that the sequencer itself can be sequenced.
+The fact that the sequencer itself can be sequenced makes it easier for us to
+make music making machines (in contrast to making music itself, where this fact
+would not be of much importance).
 
 This is not to say that music making machines were not possible before. A
 windchime is a great example of a music making machine. It uses a quantizer to
