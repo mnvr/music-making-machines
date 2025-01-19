@@ -8,9 +8,8 @@ used in any medium that allows direct and basic manipulation of signals (modular
 hardware, other visual patching softwares, music programming languages etc).
 
 <small>
-† using stock
-plugins as far as possible; if other ones are necessary only other open source
-and freely available ones are used.
+† using stock plugins as far as possible; if other ones are necessary only other
+open source and freely available ones are used.
 </small>
 
 ## Meta
@@ -72,6 +71,43 @@ convert the noise signal provided by wind to notes on a musical scale, with the
 wind also serving as the background noise in which the notes sit.
 
 ## VCV Rack specifics
+
+### All signals are voltages
+
+Any output can be connected to any input; all cables carry (virtual) voltages.
+
+However, purely semantically, there are distinctions:
+
+-   **Audio** signals are audible when played through speakers. They contain
+    _audio-rate_ frequencies typically between 20Hz to 20kHz.
+
+-   **CV** (control voltage) signals modulate parameters of other modules. e.g. an
+    LFO (low frequency oscillator) can oscillate the pitch of a VCO
+    (voltage-controlled oscillator) or the volume level of a VCA
+    (voltage-controlled amplifier).
+
+-   **1V/oct** (1 volt per octave) signals are control voltages, that is, CV
+    signals, that represent a pitch or a note. In this standard, an increase of 1V
+    increases the pitch by 1 octave. Since there are 12 semitones in an octave, an
+    increase in 1/12 V increases the pitch by 1 semitone.
+
+-   **Gate** signals carry an on/off signal. 0V represents off, and a positive
+    voltage (typically 10V) represents on. For example, a gate signal can turn on
+    whe a key is pressed and off when the key is released.
+
+-   **Trigger** signals are short gates, usually around 1 millisecond, that cause
+    an event to occur, such as a percussion hit.
+
+-   **Clock** signals are triggers played at a steady tempo.
+
+Viewed as a tree:
+
+-   Audio
+-   CV
+    -   1V/oct
+    -   Gate
+        -   Trigger
+            -   Clock
 
 ### Patches are text files
 
