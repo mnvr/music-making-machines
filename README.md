@@ -109,6 +109,12 @@ Viewed as a tree:
         -   Trigger
             -   Clock
 
+> [!TIP]
+>
+> Remember that everything is a voltage. (Most) modules are not about "audio" or
+> "CV". It only matters whether a signal is at audio rate when trying to move to
+> a speaker. Before that, at any point, it is only voltages.
+
 Input and output voltages carried by patch cables are thus in the (virtual)
 voltage unit, V. Both oscillators and CV generators typically produce 10 Vpp
 (peak-to-peak) signals, but audio outputs are usually **±5V**, while CV sources
