@@ -114,6 +114,17 @@ voltage unit, V. Both oscillators and CV generators typically produce 10 Vpp
 (peak-to-peak) signals, but audio outputs are usually **±5V**, while CV sources
 are either **0 to 10V** (unipolar CV) or **±5V** (bipolar CV).
 
+## Pitches and frequencies
+
+Frequency knobs in audio-rate oscillators typically use a baseline of C4 (middle
+C, MIDI 60, `f0 = 261.6256 Hz`) at their default position. This can be offset by
+an input voltage V which would use the 1 V/oct (volt-per-octave) standard for CV
+control of frequency information. Thus the offset frequency in terms of the
+input voltage V would be `f = f0 * 2 ^ V`, where `f0` is the aforementioned
+baseline C4.
+
+LFOs and clock generators should use 120 BPM (`f0 = 2 Hz`) as their default.
+
 ### Patches are text files
 
 Almost. They're compressed folders containing the patch JSON, alongwith any wav
