@@ -109,6 +109,11 @@ Viewed as a tree:
         -   Trigger
             -   Clock
 
+Input and output voltages carried by patch cables are thus in the (virtual)
+voltage unit, V. Both oscillators and CV generators typically produce 10 Vpp
+(peak-to-peak) signals, but audio outputs are usually **±5V**, while CV sources
+are either **0 to 10V** (unipolar CV) or **±5V** (bipolar CV).
+
 ### Patches are text files
 
 Almost. They're compressed folders containing the patch JSON, alongwith any wav
