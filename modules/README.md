@@ -59,3 +59,48 @@ float pitch = inputs[PITCH].voltage; /* voltage of second jack */
 pitch += octave; /* The "magic" */
 output[PITCH].voltage = pitch; /* voltage of third (output) jack */
 ```
+
+## Mix
+
+Mix adds voltages.
+
+![Mix adds voltages](i/mix-1.png)
+
+**8vert** and **Oct** both allow us to create constant voltages, including 1.
+Oct allows us to add a constant voltage to a (variable) voltage. We have all the
+Peano axioms we need recreate arithmetic, but it did take Russell & Whitehead
+300 pages to define plus. Who has time for 300 pages these days, we want our
+addition, we want it now.
+
+Mix allows us to add two variable voltages, completing the triad.
+
+| Rack  | Math  |
+|-------|-------|
+| 8vert | 1     |
+| Oct†  | 1 + a |
+| Mix   | a + a |
+
+<small>† Oct also allows us to add two variable ones, if we're okay with
+rounding one of them. Although one man's rounding is another man's
+quantizer...</small>
+
+But if we just want to add the same thing to itself, we don't necessarily need
+to duplicate it, we can just drag _two_ cables from the output jack to the
+inputs.
+
+![Stackable outputs](i/mix-2.png)
+
+This ability, called **Stackable outputs**, allows us to stack multiple cables
+on an output jack (or "ports", as Rack calls them). Which leads one to wonder:
+can we stack multiple cables on an input?
+
+We can. And it does what you'd expect it to - it'll add all the voltages up.
+
+![Stackable inputs](i/mix-3.png)
+
+> [!NOTE]
+>
+> The mischievious amongst you are already thinking of it, but no, we cannot do
+> both simultaneously for the same port pair - we can't drag two cables from the
+> same output to the same input.
+
