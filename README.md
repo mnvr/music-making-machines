@@ -52,6 +52,8 @@ sit.
 
 ## VCV Rack specifics
 
+Reference: [VCV Rack Manual](https://vcvrack.com/manual/).
+
 ### All signals are voltages
 
 Any output can be connected to any input; all cables carry (virtual) voltages.
@@ -94,6 +96,18 @@ Viewed as a tree:
 > Remember that everything is a voltage. (Most) modules are not about "audio" or
 > "CV". It only matters whether a signal is at audio rate when trying to move to
 > a speaker. Before that, at any point, it is only voltages.
+
+> [!WARNING]
+>
+> While we just emphasized that everything is a voltage, there is one
+> implementation distinction between "audio" voltages and "CV" voltages. The VCV
+> VCO uses anti-aliasing to avoid introducing harmonics beyond the Nyquist
+> frequency, so the waveforms it generates exhibit the Gibbs effect (i.e. the
+> square waves are not exactly square but wiggle at the edges).
+>
+> The VCV LFO doesn't use anti-aliasing. Thus, the LFO is more suited for
+> generating CV for modulation, while the VCO is more suitable for generating
+> audible waveforms.
 
 Input and output voltages carried by patch cables are thus in the (virtual)
 voltage unit, V. Both oscillators and CV generators typically produce 10 Vpp
