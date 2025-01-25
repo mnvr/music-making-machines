@@ -35,8 +35,27 @@ on.
 
 Oct outputs 1V.
 
-![Oct outputs 1V when octave shifted by 1](i/oct1v-1.png)
+![Octave outputs 1V when octave shifted by 1](i/oct1v-1.png)
 
 But it can also output 4.
 
-![Oct outputs then number of volts it is set to octave shift](i/oct1v-2.png)
+![Octave outputs then number of volts it is set to octave shift](i/oct1v-2.png)
+
+And it can also output 8.
+
+![Octave's octave shift can be modulated](i/oct1v-3.png)
+
+The octave shift (the yellow dot, plus the first input jack) will be literally
+added to the "input" (second jack). That's all that Octave does.
+
+![Octave's is a literal adder](i/oct1v-4.png)
+
+Don't believe me? [Read the source](https://github.com/VCVRack/Fundamental/blob/d1c9f6f1fe7e2f2f1fa85cf2da3ac798b86ed2de/src/Octave.cpp#L41)!
+
+```cpp
+int octave = octaveParam /* yellow dot in the panel */
+           + round(inputs[OCTAVE].voltage); /* voltage of first jack */
+float pitch = inputs[PITCH].voltage; /* voltage of second jack */
+pitch += octave; /* The "magic" */
+output[PITCH].voltage = pitch; /* voltage of third (output) jack */
+```
