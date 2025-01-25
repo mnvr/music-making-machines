@@ -25,3 +25,8 @@ Of many kinds if you want.
 ![8vert restarts the ladder on each input](8vert10v-6.png)
 
 8vert can output any volts, not 10 if you want.
+
+![8vert allows arbitrary constant voltage outputs](8vert10v-7.png)
+
+8 attenuverters make 8vert, making this the 8th fact about it, and let's move
+on.
