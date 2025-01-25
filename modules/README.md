@@ -30,3 +30,13 @@ Of many kinds if you want.
 
 8 attenuverters make 8vert, making this the 8th fact about it, and let's move
 on.
+
+## Oct
+
+Oct outputs 1V.
+
+![Oct outputs 1V when octave shifted by 1](i/oct1v-1.png)
+
+But it can also output 4.
+
+![Oct outputs then number of volts it is set to octave shift](i/oct1v-2.png)
