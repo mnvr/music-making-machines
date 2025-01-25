@@ -27,8 +27,8 @@ open source and freely available ones are used.
 ## Steps
 
 1. Spend time with the stock modules.
-    - Their [Documentation](https://vcvrack.com/Free) is great.
-    - Here is a [quirkier walkthrough](t/README.md).
+    - Their [documentation](https://vcvrack.com/Free) is great.
+    - Here is a [quirkier walkthrough](modules/README.md).
 
 2. Recreate some patches others have made.
     - TODO
