@@ -15,14 +15,14 @@ open source and freely available ones are used.
 ## Meta
 
 - **Play**. Musical instruments take <i>decades</i> to learn how to
-  operate.These techniques are no different.
+  operate. These techniques are no different.
 
 - **Embrace limitations**. Limitations delineate the playground we're playing
   in, allowing us to focus on and get in the flow of playing.
 
 - **Keep a patch journal**. Writing about music is like dancing about food.
   Still, there is value in being immersed in what one is doing, and writing is
-  one common way. _There can be other rituals too_.
+  one common way. Not the only way though, _there can be other rituals too_.
 
 ## Steps
 
@@ -39,7 +39,7 @@ open source and freely available ones are used.
 
 The heart of music making machines is often a sequencer. This is in contrast to
 if we were doing sound design, where the focus would be on the oscillator or the
-filter.
+filter, or if we were making music itself, where the musician would be the sequencer.
 
 Everything can be modulated by a sequencer, including the sequencer itself.
 
