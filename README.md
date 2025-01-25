@@ -68,20 +68,20 @@ However, purely semantically, there are distinctions:
 
 - **CV** (control voltage) signals modulate parameters of other modules. e.g. an
   LFO (low frequency oscillator) can oscillate the pitch of a VCO
-  (voltage-controlled oscillator) or the volume level of a VCA
+  (voltage-controlled oscillator), or the volume level of a VCA
   (voltage-controlled amplifier).
 
 - **1V/oct** (1 volt per octave) signals are control voltages, that is, CV
   signals, that represent a pitch or a note. In this standard, an increase of 1V
-  increases the pitch by 1 octave. Since there are 12 semitones in an octave, an
-  increase in 1/12 V increases the pitch by 1 semitone.
+  increases the pitch by 1 octave. Since there are 12 notes in an octave, an
+  increase in 1/12 V increases the pitch by 1 note.
 
 - **Gate** signals carry an on/off signal. 0V represents off, and a positive
   voltage (typically 10V) represents on. For example, a gate signal can turn on
   when a key is pressed and off when the key is released.
 
-- **Trigger** signals are short gates, usually around 1 millisecond, that cause
-  an event to occur, such as a percussion hit.
+- **Trigger** signals are short gates, typically 1 millisecond, that cause an
+  event to occur, such as a triggering a sound.
 
 - **Clock** signals are triggers played at a steady tempo.
 
@@ -91,8 +91,8 @@ Viewed as a tree:
 - CV
   - 1V/oct
   - Gate
-   - Trigger
- - Clock
+    - Trigger
+      - Clock
 
 > [!TIP]
 >
@@ -115,7 +115,8 @@ Viewed as a tree:
 Input and output voltages carried by patch cables are thus in the (virtual)
 voltage unit, V. Both oscillators and CV generators typically produce 10 Vpp
 (peak-to-peak) signals, but audio outputs are usually **±5V**, while CV sources
-are either **0 to 10V** (unipolar CV) or **±5V** (bipolar CV).
+are either **0 to 10V** (unipolar CV. e.g. this is the default for the VCV LFO)
+or **±5V** (bipolar CV; LFO emits this when OFST switch is off).
 
 ## Pitches and frequencies
 
@@ -136,6 +137,11 @@ files that the patch uses.
 tar xvzf my-patch.vcv
 more patch.json
 ```
+
+> [!TIP]
+>
+> I know what you're thinking. Since they are JSON files, maybe I can write a
+> program to generate them...
 
 ### Stop the engine
 
