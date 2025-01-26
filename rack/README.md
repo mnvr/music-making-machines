@@ -22,7 +22,24 @@ topmost cable is from_.
 ![Cmd and shift and drag creates a new cable from where the topmost cable came from](i/key-2.png)
 
 Note how in this case Rack will retain the cable color (In case of <kbd>Cmd +
-drag</kbd> it auto rotates the color, unless you've turned it off in the View menu).
+drag</kbd> it auto rotates the color, unless you've turned it off in the View
+menu).
+
+The easiest way I've found to make a new cable topmost is to go to its other
+port and click on it there.
+
+The current / _selected_ module is the one over which the mouse pointer is
+currently placed.
+
+* Use <kbd>DEL</kbd> to delete it.
+
+* <kbd>Cmd + D</kbd> to duplicate it.
+
+* <kbd>Cmd + shift + D</kbd> to duplicate it with the cables intact.
+
+* <kbd>Cmd + I</kbd> to (re-)initialize it, resetting it to its default state.
+
+* <kbd>Cmd + F1</kbd> to view its manual.
 
 ## Tips
 
