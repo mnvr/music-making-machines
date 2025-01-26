@@ -12,12 +12,12 @@ Dragging creates a cable.
 
 <kbd>Shift + click</kbd> deletes the topmost cable.
 
-<kbd>Cmd + drag</kbd> creates a new cable _from the  jack_
+<kbd>Cmd + drag</kbd> creates a new cable _from the  jack_.
 
 ![Cmd and drag creates a new cable from the jack](i/key-1.png)
 
-<kbd>Cmd + shift + drag</kbd> creates a new cable _from the jack that topmost
-cable is from_.
+<kbd>Cmd + shift + drag</kbd> creates a new cable _from the jack where the
+topmost cable is from_.
 
 ![Cmd and shift and drag creates a new cable from where the topmost cable came from](i/key-2.png)
 
