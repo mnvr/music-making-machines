@@ -1,3 +1,5 @@
+[8vert](#8vert) • [Oct](#oct) • [Mix](#mix)
+
 ## 8vert
 
 8vert outputs 10V,
