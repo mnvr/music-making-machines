@@ -1,4 +1,6 @@
-[8vert](#8vert) • [Oct](#oct) • [Mix](#mix)
+# M for Modules
+
+[8vert](#8vert) • [Oct](#oct) • [Mix](#mix) • [Audio](#audio)
 
 ## 8vert
 
@@ -193,3 +195,27 @@ inputs.
 
 This is handy for CV, since then the output modulation is in the same range as
 the input modulations.
+
+## Audio
+
+VCV Rack comes with stock modules of two types.
+
+1. Core modules are modules that are included in VCV Rack itself because they
+  deal with I/O (audio and MIDI).
+
+2. Fundamental modules are modules provided by the Fundamental plugin that also
+   comes with VCV Rack.
+
+This document is a tour of the Fundamental modules, but from the first category
+there is one, and only one, that we will need for our purposes.
+
+Audio (or more specifically, Audio 2). All it does is send its input out through
+your speakers. Might be useful.
+
+![Audio 2 plays the audio signal sent to its L/MON input](i/audio-1.png)
+
+
+> [!TIP]
+>
+> Actually, there is another core module that we've been using all along, to
+> scribble our graffiti on. Notes!
