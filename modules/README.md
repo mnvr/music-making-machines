@@ -106,9 +106,8 @@ inputs](https://github.com/VCVRack/Rack/blob/4a7ad1e1e781f2e858e2c8b04867e9665fe
 do their thing:
 
 ```py
-for (each cable of cables) {
-  inputVoltage += cable.outputVoltage
-}
+for (each cable of cables)
+    inputVoltage += cable.outputVoltage
 ```
 
 while this is how
@@ -116,16 +115,15 @@ while this is how
 does it:
 
 ```cpp
-for (int i = 0; i < 6; i++) {
+for (int i = 0; i < 6; i++)
     outputVoltage += inputs[i].voltage
-}
 ```
 
 So both are literally adding all the inputs voltages up. This is what is
 sometimes referred to as a "unity mix" - the inputs are added up without any
-gain or attenuation (i.e. with _unit_ gain) applied to them or to the result -
-and is useful behaviour for the different type of semantics that might be
-attached to the voltages under consideration:
+gain or attenuation (i.e. with _unit_ gain) applied to them or to the result.
+This is useful behaviour for various semantics that might be attached to the
+voltages under consideration:
 
 * For audio signals we get an equally weighted mix of all the input sounds.
 
@@ -159,9 +157,24 @@ sure how this new operator (`f(x) = x * -1`) adds to our Peano arithmetic, but w
 applied to a control voltage, this will reverse its effect, while for an audio
 signal, it will invert its phase.
 
-However, both these things - changing the output level, including inverting it -
-can already be done by an 8vert. Maybe a Mix is more convenient, but it isn't
-doing something we already cannot, right?
+In the last sentence, notice the different semantic effect multiplying by -1 has
+on the voltage. The code is literally [multiplying by
+-1](https://github.com/VCVRack/Fundamental/blob/d1c9f6f1fe7e2f2f1fa85cf2da3ac798b86ed2de/src/Mixer.cpp#L48):
+
+```cpp
+if (invert)
+    gain *= -1;
+```
+
+but it does different things depending on what the cable is carrying. In most
+cases, the conventions around what the voltages in the cable mean, and the
+operations we can do to them using modules, have evolved so that the effect will
+be something useful, but there is nothing guaranteeing it. For example, if cable
+is carrying a gate, then inverting it is usually not going to be what we want.
+
+Anyways, so both these things - changing the output level, including inverting
+it - can already be done by an 8vert. Maybe a Mix is more convenient, but it
+isn't doing something we already cannot, right?
 
 > [!TIP]
 >
@@ -173,3 +186,8 @@ doing something we already cannot, right?
 
 Turns out, Mix does have a new trick up its sleeve - it allows averaging the
 inputs.
+
+![Mix has an option to average voltages at the outputs](i/mix-5.png)
+
+This is handy for CV, since then the output modulation is in the same range as
+the input modulations.
