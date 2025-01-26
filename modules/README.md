@@ -53,11 +53,11 @@ added to the "input" (second jack). That's all that Octave does.
 Don't believe me? [Read the source](https://github.com/VCVRack/Fundamental/blob/d1c9f6f1fe7e2f2f1fa85cf2da3ac798b86ed2de/src/Octave.cpp#L41)!
 
 ```cpp
-int octave = octaveParam /* yellow dot in the panel */
-           + round(inputs[OCTAVE].voltage); /* voltage of first jack */
-float pitch = inputs[PITCH].voltage; /* voltage of second jack */
-pitch += octave; /* The "magic" */
-output[PITCH].voltage = pitch; /* voltage of third (output) jack */
+int octave = octaveParam              /* yellow dot in the panel */
+           + round(inputs[OCTAVE].voltage) /* voltage of first jack */
+float pitch = inputs[PITCH].voltage   /* voltage of second jack */
+pitch += octave                       /* The "magic" */
+output[PITCH].voltage = pitch;        /* voltage of third (output) jack */
 ```
 
 ## Mix
@@ -101,10 +101,41 @@ We can. And it does what you'd expect it to - it'll add all the voltages up.
 > <small> For those wondering, no, we can't drag two cables from the same output
 > to the same input. </small>
 
-So why do we need a Mix? Aren't both of them doing the exact same thing -
-literally adding all the inputs up?
+So both of them doing the exact same thing? Yes. This is how [stackable
+inputs](https://github.com/VCVRack/Rack/blob/4a7ad1e1e781f2e858e2c8b04867e9665fecc1f1/src/engine/Engine.cpp#L383-L401)
+do their thing:
 
-We don't, and they are.
+```py
+for (each cable of cables) {
+  inputVoltage += cable.outputVoltage
+}
+```
+
+while this is how
+[Mix](https://github.com/VCVRack/Fundamental/blob/d1c9f6f1fe7e2f2f1fa85cf2da3ac798b86ed2de/src/Mixer.cpp#L58-L61)
+does it:
+
+```cpp
+for (int i = 0; i < 6; i++) {
+    outputVoltage += inputs[i].voltage
+}
+```
+
+So both are literally adding all the inputs voltages up. This is what is
+sometimes referred to as a "unity mix" - the inputs are added up without any
+gain or attenuation (i.e. with _unit_ gain) applied to them or to the result -
+and is useful behaviour for the different type of semantics that might be
+attached to the voltages under consideration:
+
+* For audio signals we get an equally weighted mix of all the input sounds.
+
+* For CVs this linear combination allows each input to equally offset the
+  modulated parameter (note that voltages can be negative too).
+
+* For 1V/oct pitches, the notes are transposed.
+
+* For gates, it emulates a logical "OR" - the output gate is "on" whenever any
+  of the input gates are.
 
 Mix is still useful though.
 
@@ -140,4 +171,5 @@ doing something we already cannot, right?
 > all these give rise to modules that are not "one way to do things" building
 > blocks but chimeras with overlap in functionality.
 
-Turns out, Mix does have a new trick up its sleeve.
+Turns out, Mix does have a new trick up its sleeve - it allows averaging the
+inputs.
