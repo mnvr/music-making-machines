@@ -92,15 +92,37 @@ inputs.
 
 This ability, called **Stackable outputs**, allows us to stack multiple cables
 on an output jack (or "ports", as Rack calls them). Which leads one to wonder:
-can we stack multiple cables on an input?
+can we stack multiple cables on an input? Can we have **Stackable inputs**?
 
 We can. And it does what you'd expect it to - it'll add all the voltages up.
 
 ![Stackable inputs](i/mix-3.png)
 
-> [!NOTE]
->
-> The mischievious amongst you are already thinking of it, but no, we cannot do
-> both simultaneously for the same port pair - we can't drag two cables from the
-> same output to the same input.
+> <small> For those wondering, no, we can't drag two cables from the same output
+> to the same input. </small>
 
+So why do we need a Mix? Aren't both of them doing the exact same thing -
+literally adding all the inputs up?
+
+We don't, and they are.
+
+But Mix has a few extra abilities that can be useful.
+
+For starters, stacking cables on an input port to add their voltages up, while
+convenient, can make patches "harder to read". Using a Mix is more explicit,
+though detractors will say it makes patches more "verbose". Programming language
+syntax debates are not limited to text.
+
+Mix allows us to set the output level. That is, after adding all the inputs up,
+it can attenuate the result before setting the voltage on the output jack.
+
+![Mix allows setting the output LEVEL](i/mix-4.png)
+
+And it allows us to multiply a voltage by -1 (Right click, "invert output").
+
+![Mix allows setting the output LEVEL](i/mix-4.png)
+
+Not
+sure how this new operator (`f(x) = x * -1`) adds to our Peano arithmetic, but when
+applied to a control voltage, this will reverse its effect, while for an audio
+signal, it will invert its phase.
