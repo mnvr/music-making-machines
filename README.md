@@ -29,7 +29,7 @@ open source and freely available ones are used.
 ## Steps
 
 1. Spend time with the stock modules.
-    - Their [documentation](https://vcvrack.com/Free) is great.
+    - Their [documentation](https://vcvrack.com/Free) is great ❤️.
     - Here is a [quirkier walkthrough](modules/README.md).
 
 2. Recreate some patches others have made.
@@ -57,7 +57,10 @@ sit.
 
 ## VCV Rack specifics
 
-Reference: [VCV Rack Manual](https://vcvrack.com/manual/).
+Reference: [VCV Rack Manual](https://vcvrack.com/manual/)
+
+Here are [some more notes](rack/README.md) you might find useful, and below are
+two koans.
 
 ### All signals are voltages
 
@@ -120,7 +123,7 @@ voltage unit, V. Both oscillators and CV generators typically produce 10 Vpp
 are either **0 to 10V** (unipolar CV. e.g. this is the default for the VCV LFO)
 or **±5V** (bipolar CV; LFO emits this when OFST switch is off).
 
-## Pitches and frequencies
+#### Pitches and frequencies
 
 Frequency knobs on VCO typically default to C4 (middle C, MIDI 60, `f0 =
 261.6256 Hz`). This can be offset by an input voltage V which would use the 1
@@ -144,8 +147,3 @@ more patch.json
 >
 > I know what you're thinking. Since they are JSON files, maybe I can write a
 > program to generate them...
-
-### Stop the engine
-
-There isn't a way to stop the engine, but as a workaround <kbd>Cmd - A</kbd>
-(Select all modules) and <kbd>Cmd - E</kbd> (Bypass).

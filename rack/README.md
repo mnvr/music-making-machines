@@ -1,6 +1,6 @@
 # R for Rack
 
-[Keyboard shortcuts](#keyboard-shortcuts)
+[Keyboard shortcuts](#keyboard-shortcuts) • [Tips](#tips)
 
 ## Keyboard shortcuts
 
@@ -23,3 +23,10 @@ cable is from_.
 
 Note how in this case Rack will retain the cable color (In case of <kbd>Cmd +
 drag</kbd> it auto rotates the color, unless you've turned it off in the View menu).
+
+## Tips
+
+### Stop the engine
+
+There isn't a way to stop the engine, but as a workaround <kbd>Cmd - A</kbd>
+(Select all modules) and <kbd>Cmd - E</kbd> (Bypass).
