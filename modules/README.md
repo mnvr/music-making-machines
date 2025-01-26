@@ -1,6 +1,6 @@
 # M for Modules
 
-[8vert](#8vert) • [Oct](#oct) • [Mix](#mix) • [Audio](#audio) • [Poly](#poly)
+[8vert](#8vert) • [Oct](#oct) • [Mix](#mix) • [CV Mix](#cv-mix) • [Audio](#audio) • [Poly](#poly)
 
 ## 8vert
 
@@ -204,23 +204,23 @@ CV Mix also outputs 10V.
 100%](i/cv-mix-1.png)
 
 But unlike 8vert, the inputs don't ladder through, but each input gets its own
-independent 10V. In this example, the first input to CV mix is getting 1V from
-the Oct.
+independent 10V.
 
 ![Unlike 8vert, each CV input gets an independent 10V](i/cv-mix-2.png)
 
-The second and third inputs are 10V, but since the second level knob is at 0,
-none of that goes through. The third knob is at 50%, so 5V (50% of 10V) goes
-through. The output of CV Mix is then the sum of all three scaled inputs, 1V +
-0V + 5V, which we can see in the scope.
+In the above example, the first input to CV mix is getting 1V from the Oct. The
+second and third inputs are 10V, but since the second level knob is at 0, none
+of that goes through. The third knob is at 50%, so 5V (50% of 10V) goes through.
+The output of CV Mix is then the sum of all three scaled inputs, 1V + 0V + 5V,
+which we can see in the scope.
 
 OTOH, for the 8vert, the first input is 1V, overriding the default 10V, for
 itself and all the inputs below, so the (second) output is also 1V.
 
 > [!TIP]
 >
-> The interface for these moduless tries to indicate this: notice how the the CV
-> Mix has a single line indicating independent 10V supplies in the unpatched
+> The interface for the modules indicates these distinctions: notice how the the
+> CV Mix has a single line indicating independent 10V supplies in the unpatched
 > state for all inputs, while the 8vert arrows indicate laddering between
 > successive inputs with the first one getting a 10V.
 >
