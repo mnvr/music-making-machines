@@ -221,8 +221,8 @@ itself and all the inputs below, so the (second) output is also 1V.
 >
 > The interface for the modules indicates these distinctions: notice how the the
 > CV Mix has a single line indicating independent 10V supplies in the unpatched
-> state for all inputs, while the 8vert arrows indicate laddering between
-> successive inputs with the first one getting a 10V.
+> state for all inputs, while the 8vert arrows indicate the cascade between
+> successive inputs, with only the first one getting a 10V.
 >
 > ![Module interface has subtle cues on the lines and arrows to indicate the
 > different 8vert and CV Mix laddering](i/cv-mix-3.png)
