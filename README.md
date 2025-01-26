@@ -2,6 +2,8 @@
 
 Notes about making Music Making Machines.
 
+<img src="assets/i/icon-rounded.png" width="128">
+
 The specific software used is freely available and open source VCV
 Rack<small>†</small>. The same techniques can be used in any medium that allows
 basic but direct manipulation of signals (modular hardware, other visual
