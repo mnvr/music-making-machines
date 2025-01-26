@@ -196,6 +196,47 @@ inputs.
 This is handy for CV, since then the output modulation is in the same range as
 the input modulations.
 
+## CV Mix
+
+CV Mix also outputs 10V.
+
+![An unpatched CV mix outputs 10V when the corresponding level is
+100%](i/cv-mix-1.png)
+
+But unlike 8vert, the inputs don't ladder through, but each input gets its own
+independent 10V. In this example, the first input to CV mix is getting 1V from
+the Oct.
+
+![Unlike 8vert, each CV input gets an independent 10V](i/cv-mix-2.png)
+
+The second and third inputs are 10V, but since the second level knob is at 0,
+none of that goes through. The third knob is at 50%, so 5V (50% of 10V) goes
+through. The output of CV Mix is then the sum of all three scaled inputs, 1V +
+0V + 5V, which we can see in the scope.
+
+OTOH, for the 8vert, the first input is 1V, overriding the default 10V, for
+itself and all the inputs below, so the (second) output is also 1V.
+
+> [!TIP]
+>
+> The interface for these moduless tries to indicate this: notice how the the CV
+> Mix has a single line indicating independent 10V supplies in the unpatched
+> state for all inputs, while the 8vert arrows indicate laddering between
+> successive inputs with the first one getting a 10V.
+>
+> ![Module interface has subtle cues on the lines and arrows to indicate the
+> different 8vert and CV Mix laddering](i/cv-mix-3.png)
+
+So CV Mix is like Mix in that it sums its inputs, but also like 8vert in that it
+allows us to "attenuvert" (attenuate and/or invert) the inputs before they get
+summed, and like 8vert also provides a default value 10V for unpatched inputs.
+
+![8vert, CV Mix and Mix next to each other for easy comparison](i/cv-mix-4.png)
+
+Or to put it the other way around, CV Mix provides input level control unlike
+Mix which provides output level control; and CV Mix provides a single summed
+output unlike 8vert which provides 8 independent outputs.
+
 ## Audio
 
 VCV Rack comes with stock modules of two types.
