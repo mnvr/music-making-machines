@@ -6,7 +6,7 @@
 
 8vert outputs 10V,
 
-![8vert outputs 10V](i/8vert10v-1.png)
+![8vert outputs 10V if nothing is patched to its input](i/8vert10v-1.png)
 
 As many times as you want.
 
