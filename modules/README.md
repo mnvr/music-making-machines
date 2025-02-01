@@ -237,6 +237,82 @@ Or to put it the other way around, CV Mix provides input level control unlike
 Mix which provides output level control; and CV Mix provides a single summed
 output unlike 8vert which provides 8 independent outputs.
 
+#### Why "CV"?
+
+CV Mix also works with audio, despite its name. Or does it?
+
+If we patch an audio mix through it, and through a combination of 8vert and Mix,
+we seem to get the same result (the offset in the example is just to show that
+there really are two signals; without the offset they <i>seem</i> to align
+exactly).
+
+![The same signals, mixed via a combination of 8vert and Mix, and also via CV
+Mix](i/cv-mix-5.png)
+
+Let us see if we can spot a difference in the source. This is
+[Mix](https://github.com/VCVRack/Fundamental/blob/d1c9f6f1fe7e2f2f1fa85cf2da3ac798b86ed2de/src/CVMix.cpp#L47-L59):
+
+```c++
+float out = 0.f;
+for (int i = 0; i < 6; i++) {
+    out += inputs[IN_INPUTS + i].getVoltageSimd(c);
+}
+out *= params[LEVEL_PARAM].getValue();
+outputs[OUT_OUTPUT].setVoltage(out, 0);
+```
+
+> I've tweaked some variables etc in both cases to better point the
+> similarities.
+
+and this is [CV
+Mix](https://github.com/VCVRack/Fundamental/blob/d1c9f6f1fe7e2f2f1fa85cf2da3ac798b86ed2de/src/CVMix.cpp#L47-L59):
+
+```c++
+float_4 out = 0.f;
+for (int i = 0; i < 3; i++) {
+  float_4 cv = inputs[IN_INPUTS + i].getNormalVoltageSimd<float_4>(10.f, c);
+  cv *= params[LEVEL_PARAMS + i].getValue();
+  out += cv;
+}
+outputs[OUT_OUTPUT].setVoltageSimd(out, 0);
+```
+
+There are some surface level differences – Mix has 6 inputs while CV Mix has 3 –
+and some ergonomic differences – Mix has one gain control and so the
+multiplication with the gain happens outside the loop, while CV Mix has one gain
+control for each input so the multiplication happens inside.
+
+There is also the difference in the function used to read the value - Mix uses
+`getVoltageSimd`, while CV Mix uses `getNormalVoltageSimd`, which is defined as:
+
+```c++
+T getNormalVoltageSimd(T normalVoltage, uint8_t ch) {
+    return isConnected() ? getVoltageSimd(ch) : normalVoltage;
+}
+```
+
+However, because of what the default positions of the gain knobs are, this
+doesn't make a difference in the initial state of the module – For Mix the level
+knob defaults to 100% and any inputs which are not connected are taken to be 0;
+For CV Mix any input which is not connected is taken to be 10 V, but since the
+level knobs default to 0% it all comes out to be the unless we start twisting
+the knobs.
+
+Note that the question here is not if CV Mix is the same as Mix, or whether it
+is redundant etc. We already mentioned that these modules are not meant to be
+abstract uniquely factored out building blocks but rather are shaped by the
+evolutionary landscape of usefulness to making music. So obviously there are
+differences in the two. CV Mix is tailored more for mixing, well, CV, while for
+mixing audio we usually need control over the envelopes, which is handled by a
+module we'll see soon, called VCA Mix.
+
+The question is – why is it called "CV" mix specifically? Can we not use it to
+process audio?
+
+Does the answer lies in a small detail in the above code: `float_4`?
+
+## VCA Mix
+
 ## Audio
 
 VCV Rack comes with stock modules of two types.
