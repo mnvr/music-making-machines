@@ -242,14 +242,14 @@ output unlike 8vert which provides 8 independent outputs.
 CV Mix also works with audio, despite its name. Or does it?
 
 If we patch an audio mix through it, and through a combination of 8vert and Mix,
-we seem to get the same result (the offset in the example is just to show that
-there really are two signals; without the offset they <i>seem</i> to align
-exactly).
+we seem to get the same result (the _OFST1_ on the scope in the example is just
+to show that there really are two signals; without the offset they align
+perfectly).
 
 ![The same signals, mixed via a combination of 8vert and Mix, and also via CV
 Mix](i/cv-mix-5.png)
 
-Let us see if we can spot a difference in the source. This is
+Let us see if we can spot a difference in the code. This is
 [Mix](https://github.com/VCVRack/Fundamental/blob/d1c9f6f1fe7e2f2f1fa85cf2da3ac798b86ed2de/src/CVMix.cpp#L47-L59):
 
 ```c++
@@ -278,9 +278,9 @@ outputs[OUT_OUTPUT].setVoltageSimd(out, 0);
 ```
 
 There are some surface level differences – Mix has 6 inputs while CV Mix has 3 –
-and some ergonomic differences – Mix has one gain control and so the
-multiplication with the gain happens outside the loop, while CV Mix has one gain
-control for each input so the multiplication happens inside.
+and some differences due to the module's interfaces – Mix has one gain control
+and so the multiplication with the gain happens outside the loop, while CV Mix
+has one gain control for each input so the multiplication happens inside.
 
 There is also the difference in the function used to read the value - Mix uses
 `getVoltageSimd`, while CV Mix uses `getNormalVoltageSimd`, which is defined as:
@@ -300,16 +300,45 @@ the knobs.
 
 Note that the question here is not if CV Mix is the same as Mix, or whether it
 is redundant etc. We already mentioned that these modules are not meant to be
-abstract uniquely factored out building blocks but rather are shaped by the
+abstract, uniquely factored out building blocks but rather are shaped by the
 evolutionary landscape of usefulness to making music. So obviously there are
 differences in the two. CV Mix is tailored more for mixing, well, CV, while for
 mixing audio we usually need control over the envelopes, which is handled by a
 module we'll see soon, called VCA Mix.
 
-The question is – why is it called "CV" mix specifically? Can we not use it to
-process audio?
+The hypothetical question is – why is it called "CV" mix specifically? Can we
+not use it to process audio were we to wish to do so?
 
 Does the answer lies in a small detail in the above code: `float_4`?
+
+`float_4` is a [vector of 4 floats](https://github.com/VCVRack/Rack/blob/4a7ad1e1e781f2e858e2c8b04867e9665fecc1f1/include/simd/Vector.hpp#L340):
+
+```c++
+using float_4 = Vector<float, 4>
+```
+
+which allows it to be processed upon by the faster [SIMD ops](https://github.com/VCVRack/Rack/blob/4a7ad1e1e781f2e858e2c8b04867e9665fecc1f1/include/simd/Vector.hpp#L38-L43):
+
+```c++
+union {
+    __m128 v;
+    /** Accessing this array of scalars is slow and defeats
+        the purpose of vectorizing */
+    float s[4];
+}
+```
+
+This explains why CV Mix has 3 and not 6 inputs (it firstly doesn't need that
+many, but even if it did, using more than 4 inputs would've required the 256 bit
+SIMD datatype instead of the `__m128` that currently suffices), but efficiency
+considerations aside, conceptually it is still an array of 4 floats.
+
+So there is no difference in the data type either.
+
+We handwaved a bit when we were visualizing with the scope, let us try that but
+be precise this time. We can subtract the outputs of both paths, and if they are
+the exact same, we should see a 0V flatline.
+
 
 ## VCA Mix
 
