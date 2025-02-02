@@ -385,6 +385,24 @@ going to look at next, the VCA.
 
 ## VCA
 
+The VCA is like a volume knob.
+
+![VCA can attentuate the level of an input](i/vca-1.png)
+
+Except instead of turning it by hand, you can get a (control) voltage to do it
+for you.
+
+> [!NOTE]
+>
+> Notice how we're passing control voltages to the VCA in these examples. That's
+> what the detour in the last section was about - these particular modules don't
+> care if what they get a control voltage or an audio signal, it is just
+> voltages for them to mathematically manipulate, and they'll happily work with
+> either. It is only in the context of a musical patch that there might be
+> ergonomic and functional reasons for using CV Mix for control voltages and VCA
+> (or VCA Mix) for audio voltages.
+
+
 ## VCA Mix
 
 ## Audio
