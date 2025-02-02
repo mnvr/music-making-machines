@@ -392,15 +392,19 @@ The VCA is like a volume knob.
 Except instead of turning it by hand, you can get a (control) voltage to do it
 for you.
 
+![VCA level can be controlled by a control voltage](i/vca-2.png)
+
 > [!NOTE]
 >
-> Notice how we're passing control voltages to the VCA in these examples. That's
-> what the detour in the last section was about - these particular modules don't
-> care if what they get a control voltage or an audio signal, it is just
-> voltages for them to mathematically manipulate, and they'll happily work with
-> either. It is only in the context of a musical patch that there might be
-> ergonomic and functional reasons for using CV Mix for control voltages and VCA
-> (or VCA Mix) for audio voltages.
+> Notice how we're passing a fixed "control voltage" of 1 to the _IN_ of the VCA
+> in these examples. That's what the detour in the last section was about -
+> these particular modules don't care if what they get a control voltage or an
+> audio signal, it is just voltages for them to mathematically manipulate, and
+> they'll happily work with either.
+>
+> It is only in the context of a musical patch that there might be ergonomic and
+> functional reasons for using CV Mix for control voltages and VCA (or VCA Mix)
+> for audio voltages.
 
 
 ## VCA Mix
