@@ -415,13 +415,40 @@ this module is called a **voltage controlled amplifier** (or as friends call it,
 a VCO).
 
 As a convenience, we still get the manual control if we wish in addition to the
-voltage controlled level. The input signal (the voltage at the unnamed input
-jack) is multiplied by the voltage controlled level (the control voltage at
-_IN_), and then multiplied by the manually controlled level (the setting on the
-display), and the result is what gets set as the voltage of the output jack
-_OUT_.
+voltage controlled level. The input signal (the voltage at the input jack _IN_)
+is multiplied by the voltage controlled level (the control voltage at unnamed
+jack below the level on the display), and then multiplied by the manually
+controlled level (the setting on the display), and the result is what gets set
+as the voltage of the output jack _OUT_.
 
 ![VCA output level can be set both manually and via the level control voltage at the same time](i/vca-4.png)
+
+Note the that setup in our example is uncommon. We're sending a fixed voltage as
+the input to be modulated, while in practice this is going to be a varying audio
+voltage (e.g. the output of an oscillator).
+
+![VCA behaviour for a audio-ish input](i/vca-5.png)
+
+In fact, just for illustration purposes, it might be useful to flip the order in
+which the modules are arranged in our rack, to put the modulation signal (the
+LFO) first. This has no functional impact, but it does give us a glimpse of how
+for a VCA the "input" signal is always on, it is the modulation (the amount of
+it that goes through) that is being controlled.
+
+![VCA behaviour for a audio-ish input](i/vca-6.png)
+
+> [!TIP]
+>
+> For some folks this is a stumbling block because this is not how things behave
+> in the real world. The guitar is not always playing, we need to pluck it for
+> it to make a sound. On the other hand, in modular setups, the oscillators are
+> always making a sound, the thing we're controlling is how much of it gets
+> heard (if any).
+
+On the other hand, while in our example the modulation voltage is also a varying
+voltage (in our example, also the output of an oscillator), and sometimes in
+practice indeed the modulation voltage is coming from a slow moving LFO, it
+often times is a one shot thing.
 
 
 ## VCA Mix
