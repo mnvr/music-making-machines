@@ -394,6 +394,10 @@ for you.
 
 ![VCA level can be controlled by a control voltage](i/vca-2.png)
 
+With a control voltage of 0V being 0% level, and 10V being 100% level.
+
+![VCA output vs the level control voltage](i/vca-3.png)
+
 > [!NOTE]
 >
 > Notice how we're passing a fixed "control voltage" of 1 to the _IN_ of the VCA
@@ -405,7 +409,6 @@ for you.
 > It is only in the context of a musical patch that there might be ergonomic and
 > functional reasons for using CV Mix for control voltages and VCA (or VCA Mix)
 > for audio voltages.
-
 
 ## VCA Mix
 
