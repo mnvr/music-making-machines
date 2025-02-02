@@ -43,7 +43,7 @@ Oct outputs 1V.
 
 But it can also output 4.
 
-![Octave outputs then number of volts it is set to octave shift](i/oct1v-2.png)
+![Octave outputs the number of volts it is set to octave shift](i/oct1v-2.png)
 
 And it can also output 8.
 
