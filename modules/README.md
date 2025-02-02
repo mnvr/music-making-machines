@@ -435,7 +435,7 @@ LFO) first. This has no functional impact, but it does give us a glimpse of how
 for a VCA the "input" signal is always on, it is the modulation (the amount of
 it that goes through) that is being controlled.
 
-![VCA behaviour for a audio-ish input](i/vca-6.png)
+![VCA inputs arranged in a sometimes more natural to understand order](i/vca-6.png)
 
 > [!TIP]
 >
@@ -445,11 +445,53 @@ it that goes through) that is being controlled.
 > always making a sound, the thing we're controlling is how much of it gets
 > heard (if any).
 
-On the other hand, while in our example the modulation voltage is also a varying
-voltage (in our example, also the output of an oscillator), and sometimes in
-practice indeed the modulation voltage is coming from a slow moving LFO, it
-often times is a one shot thing.
+Another thing you need to pay attention to if you're just reading this on auto
+pilot is that the (yellow) sine wave we see in the Scope above is _not_ the
+audio signal (the audio is a triangle wave coming out from the _TRI_ of the
+oscillator via the red cable). That yellow sine wave is actually the level of
+the audio, fluctuating between silence (0) and its maximum level (2.5V).
 
+> How did we get 2.5V? Audio voltages by convention in Rack are between -5V and
+> 5V, and that is also what the _TRI_ output voltage will be between. The fixed
+> level set on the VCA display is 50%, which means that after the modulation
+> we'll get a signal between -5V and 5V, which then will be further attenuated
+> 50%, giving us a signal between -2.5V and 2.5V.
+
+To see the actual audio, we need to zoom the scope to much smaller timescales.
+Here I've swapped out the modulating control voltage (the blue in the examples
+above) with the original input (red) since Scope can only show two signals at
+once. The yellow is the audio output.
+
+![Zooming into the VCA output instead of looking at the envelope](i/vca-7.png)
+
+In both cases, the yellow curve is the actual audio output, but when we zoom
+into it, we see the audio voltage itself, while previously when we set the scope
+to longer timescales via the _TIME_ knob of the Scope, the trace of this very
+same audio voltage is "squished" together in the limited pixels available on the
+Scope, effectively giving us the an outline of how its level was varying over
+time.
+
+![Zooming out on the VCA output to look at the input and output envelope](i/vca-8.png)
+
+These outlines are also called "envelopes", and we'll hear a lot of them (pun
+intended) in the future.
+
+> [!NOTE]
+>
+> In our VCA examples so far the modulation voltage is a varying voltage (in our
+> example, also the output of an oscillator), and sometimes in practice indeed
+> the modulation voltage is coming from a slow moving LFO, but often times is a
+> one shot thing.
+>
+> Taking the guitar example we were talking about a while ago - a guitar note
+> does not keep playing indefinitely, nor does it loop on and off. Instead what
+> happens is that we pluck it, and the note plays for a while, and then stops.
+> If we want similar type of behaviour in our music making machines (and we do),
+> then a LFO as a modulation voltage won't work.
+>
+> What we need for such cases is an "envelope" generator, which is what would
+> control the VCA instead of the LFO in our examples so far. But we're getting
+> ahead of ourselves here...
 
 ## VCA Mix
 
