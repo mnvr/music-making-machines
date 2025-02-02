@@ -1,6 +1,6 @@
 # M for Modules
 
-[8vert](#8vert) • [Oct](#oct) • [Mix](#mix) • [CV Mix](#cv-mix) • [Audio](#audio) • [Poly](#poly)
+[8vert](#8vert) • [Oct](#oct) • [Mix](#mix) • [CV Mix](#cv-mix) • [VCA](#vca) • [VCA Mix](#vca-mix) • [Audio](#audio) • [Poly](#poly)
 
 ## 8vert
 
@@ -336,9 +336,54 @@ considerations aside, conceptually it is still an array of 4 floats.
 So there is no difference in the data type either.
 
 We handwaved a bit when we were visualizing with the scope, let us try that but
-be precise this time. We can subtract the outputs of both paths, and if they are
-the exact same, we should see a 0V flatline.
+be precise this time. We can subtract the outputs of both paths from each other,
+and if they are the exact same, we should see a 0V flatline.
 
+That's what we try to do here. We use the combination of 8vert and Mix to first
+invert one of the paths, and then add them. This'd could've been done with just
+a single CV Mix too, but that would conflate the system under test with the test
+harness so we use the longer approach.
+
+![Comparing the delta in the output of 8vert + Mix vs CV Mix](i/cv-mix-6.png)
+
+The line is not flat!
+
+We don't need to rely on visuals either. If you look at the top of the scope, it
+is telling us that the signal has a pp (peak to peak amplitude) of 0.19V.
+
+Where is this difference coming from? Has our subversive blasphemy of using CV
+Mix to mix audio voltages finally caught up with us?
+
+To know the answer, one needs to know a bit of Rack lore. Each cable in the
+signal path introduces a 1 sample delay!
+
+> Each cable in Rack induces a 1-sample delay of its carried signal from the
+> output port to the input port. This means that it is not guaranteed that two
+> signals generated simultaneously will arrive at their destinations at the same
+> time if the number of cables in each signal's chain is different.
+>
+> [VCV Rack Manual / Voltage Standards /
+>   Timing]((https://vcvrack.com/manual/VoltageStandards#Timing))
+
+In our case, the 8vert + mix combination has 1 extra cable in the signal path as
+compared to going via CV Mix, so there is an extra sample delay, which manifests
+itself as the phase shift we're seeing at the output.
+
+There are two ways to fix this - we can add an extra cable in the CV Mix signal
+path by adding a dummy module, say a Mix; or more simply, we can get rid of the
+Mix from the 8vert + Mix combination, and instead just stack the inputs since
+we're doing a unity mix anyway.
+
+![Comparing the delta in the output of 8vert + stackable inputs vs CV Mix after ensuring the same number of cables in both signal paths](i/cv-mix-7.png)
+
+Indeed, with this change, we see the 0V flatline. The signals are exactly the
+same.
+
+CV Mix can be used to mix audio too if such a need arises. Though for audio we
+usually need something else anyway, building up to which is the module we're
+going to look at next, the VCA.
+
+## VCA
 
 ## VCA Mix
 
