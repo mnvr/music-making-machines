@@ -410,6 +410,14 @@ With a control voltage of 0V being 0% level, and 10V being 100% level.
 > functional reasons for using CV Mix for control voltages and VCA (or VCA Mix)
 > for audio voltages.
 
+We still get the manual control if we wish. So there is one manually controlled
+level (the setting on the display), and one voltage controlled level (the
+control voltage at _IN_), and they're multiplied together to give the
+amplification level for the output.
+
+![VCA output level can be set both manually and via the level control voltage at the same time](i/vca-4.png)
+
+
 ## VCA Mix
 
 ## Audio
