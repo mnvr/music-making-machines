@@ -45,9 +45,9 @@ But it can also output 4.
 
 ![Octave outputs the number of volts it is set to octave shift](i/oct1v-2.png)
 
-And it can also output 8.
+And it can also output 8. The octave shift itself can be modulated!
 
-![Octave's octave shift can be modulated](i/oct1v-3.png)
+![Octaves can be chained together, and their octave shift can also be modulated](i/oct1v-3.png)
 
 The octave shift (the yellow dot, plus the first input jack) will be literally
 added to the "input" (second jack). That's all that Octave does.
