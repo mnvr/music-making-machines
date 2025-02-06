@@ -70,13 +70,16 @@ Mix adds voltages.
 
 ![Mix adds voltages](i/mix-1.png)
 
-8vert and Oct both allow us to create constant voltages, including 1. Oct allows
-us to add a constant voltage to a (variable) voltage. We have all the Peano
-axioms we need recreate arithmetic, but it did take Russell & Whitehead 300
-pages to define plus. Who has time for 300 pages these days, we want our
-addition, we want it now.
+8vert and Oct both allow us to create constant voltages, in particular 1. Oct
+allows us to add a constant voltage to a (variable) voltage. We have all the
+Peano axioms we need recreate arithmetic!
 
-Mix allows us to add two variable voltages, completing the triad.
+But it did take Russell & Whitehead 300 pages to define "+" if they started with
+just 1 and the successor function. Who has time for 300 pages these days; we
+want our addition, and we want it now.
+
+Mix allows us to add two variable voltages, completing the triad without
+resorting to recreating arithmetic.
 
 | Rack  | Math  |
 |-------|-------|
