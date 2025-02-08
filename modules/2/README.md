@@ -4,13 +4,6 @@
 
 [Audio](#audio) • [Poly](#poly) • [VCA Mix](#vca-mix)
 
-<small>
-
-[1](..)
-**2**
-
-</small>
-
 ## Audio
 
 VCV Rack comes with stock modules of two types.

@@ -1,13 +1,7 @@
 # M for Modules
 
-[8vert](#8vert) • [Oct](#oct) • [Mix](#mix) • [CV Mix](#cv-mix) • [VCA](#vca)
-
-<small>
-
-**1**
-[2](2/)
-
-</small>
+[8vert](#8vert) • [Oct](#oct) • [Mix](#mix) • [CV Mix](#cv-mix) • [VCA](#vca) •
+[Part 2](2/)
 
 ## 8vert
 
