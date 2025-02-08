@@ -4,15 +4,10 @@ Notes about making Music Making Machines.
 
 <img src="assets/i/icon-rounded.png" width="128">
 
-The specific software used is freely available and open source VCV
-Rack<small>†</small>. The same techniques can be used in any medium that allows
-basic but direct manipulation of signals (modular hardware, other visual
-patching softwares, music programming languages etc).
-
-<small>
-† using stock plugins as far as possible; if other ones are necessary only other
-open source and freely available ones are used.
-</small>
+The specific software used is freely available and open source VCV Rack using
+stock plugins. The same techniques can be used in any medium that allows basic
+but direct manipulation of signals (modular hardware, other visual patching
+softwares, music programming languages etc).
 
 ## Meta
 

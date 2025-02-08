@@ -85,12 +85,11 @@ resorting to recreating arithmetic.
 | Rack  | Math  |
 |-------|-------|
 | 8vert | 1     |
-| Oct†  | 1 + a |
+| Oct<sup>†</sup> | 1 + a |
 | Mix   | a + a |
 
-<small>† Oct also allows us to add two variable ones, if we're okay with
-rounding one of them. Although one man's rounding is another man's
-quantizer...</small>
+> <sup>†</sup> Oct also allows us to add two variable ones, if we're okay with
+> rounding one of them. Although one man's rounding is another man's quantizer..
 
 But if we just want to add the same thing to itself, we don't necessarily need
 to duplicate it, we can just drag _two_ cables from the output jack to the
@@ -106,8 +105,8 @@ We can. And it does what you'd expect it to - it'll add all the voltages up.
 
 ![Stackable inputs](i/mix-3.png)
 
-> <small> For those wondering, no, we can't drag two cables from the same output
-> to the same input. </small>
+> For those wondering, no, we can't drag two cables from the same output to the
+> same input.
 
 So both of them doing the exact same thing? Yes. This is how [stackable
 inputs](https://github.com/VCVRack/Rack/blob/4a7ad1e1e781f2e858e2c8b04867e9665fecc1f1/src/engine/Engine.cpp#L383-L401)
