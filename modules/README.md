@@ -2,8 +2,12 @@
 
 [8vert](#8vert) • [Oct](#oct) • [Mix](#mix) • [CV Mix](#cv-mix) • [VCA](#vca)
 
-<small>1</small>
-<small>[2](2/)</small>
+<small>
+
+**1**
+[2](2/)
+
+</small>
 
 ## 8vert
 
@@ -503,6 +507,6 @@ intended) in the future.
 
 <div align="right">
 
-[Part 2](2/)
+[Part 2 →](2/)
 
 </div>

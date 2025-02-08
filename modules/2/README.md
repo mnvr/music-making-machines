@@ -1,10 +1,15 @@
+**Part Deux**
+
 # M for Modules
 
-Part Deux •
 [Audio](#audio) • [Poly](#poly) • [VCA Mix](#vca-mix)
 
-<small>[1](..)</small>
-<small>2</small>
+<small>
+
+[1](..)
+**2**
+
+</small>
 
 ## Audio
 
@@ -45,3 +50,9 @@ cables into polyphonic ones (or vice versa) and visualizing their contents.
 >
 > When starting out, for a while we can just pretend these don't exist, to
 > reduce the number of modules in our palette.
+
+## VCA Mix
+
+---
+
+[← Part 1](../)
