@@ -499,7 +499,7 @@ intended) in the future.
 The VCA has one more trick up its ~~sleeve~~ right click menu. Exponential
 responses.
 
-#### Exponential?
+#### Exponential
 
 The word exponential is one of those things that everyone knows, but no one
 really knows what it exactly means in a particular context. Often, exponential
@@ -617,7 +617,7 @@ We may have gone too far!
 > But we haven't seen the ADSR here, so this may be gobbledegook, and you can
 > safely ignore this aside.
 
-The function VCV itself uses is x<sup>4<sup>.
+The function VCV itself uses is x<sup>4</sup>.
 
 ![Quartic function](i/graph-6.png)
 
