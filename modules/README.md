@@ -552,17 +552,21 @@ including linear ones.
 
 But that caveat aside, making the level of a sound rise exponentially is an easy
 way to make them sound more natural or musically appropriate in certain contexts
-(e.g. kick sounds). Linear just sounds too _slow_; this might have to do with
-how we ourselves respond exponentially (using our wavy hand wavy definition) to
-volume - if we were to correlate the volume to say, the max level of the
-voltage, then the voltage needs to increase 3.1 times for us to feel it as twice
-as loud.
+(e.g. kick sounds). Linear just sounds too _slow_ for those cases.
 
-That's why the unit of audio levels is dB (decibels), but I feel I'm going on a
-tangent to a tangent here, so will stop at that. What do we know is - (a) linear
-is not always enough to model increases in the level of a sound, and (b)a more
-"spiky" increase sometimes sounds more natural. So the question then is - which
-"spikier" function should we use.
+> [!TIP]
+>
+> This might have to do with how we ourselves respond exponentially (using our
+> wavy hand wavy definition) to volume - if we were to correlate the volume to
+> say, the max level of the voltage, then the voltage needs to increase 3.1
+> times or us to feel it as twice as loud.
+>
+> That's why the unit of audio levels is dB (decibels), but I feel I'm going on
+> a tangent to a tangent here, so will stop at that.
+
+What do we know is - (a) linear is not always enough to model increases in the
+level of a sound, and (b)a more "spiky" increase sometimes sounds more natural.
+So the question then is - which "spikier" function should we use.
 
 Let us first try with a literal definition of an exponential function,
 e<sup>x</sup>.
@@ -573,13 +577,50 @@ This doesn't work, at least not directly. Anything to the power of 0 is 1, so is
 e<sup>0</sup>, and for a zero input we're already getting output 1, and after
 that it'll start getting out of range.
 
-> We've not defined our range explicitly, so let's make mention that. Our inputs
-> will we values between 0 and 1. Our outputs will be values between 0 and 1.
-> The task of our VCA then is to map the input (0V to 1V) to the output (0V to
-> 1V).
+> We've not defined our input and output ranges explicitly, so let's mention
+> that. Our inputs will we values between 0 and 1. Our outputs will be values
+> between 0 and 1. The task of our VCA then is to map the input (0V to 1V) to
+> the output (0V to 1V).
 
 This problem will be with any function of the form a<sup>x</sup>, so let us try
-the other way - x<sup>a</sup>. Let's take the quadratic function.
+the other way - x<sup>a</sup>. Let's take the quadratic function, x<sup>2</sup>.
+
+![Quadratic function](i/graph-3.png)
+
+It does things like bounce off in the negative direction, but within our ranges
+of interest, 0V to 1V, this does seem more promising, but it is still not
+"spiky" enough maybe? That's easy to fix, let's try cubic (x<sup>3</sup>)
+instead.
+
+![Cubic function](i/graph-4.png)
+
+Spikier harder you say? Let's try x<sup>100</sup>
+
+![x raised to 100](i/graph-5.png)
+
+We may have gone too far!
+
+> [!NOTE]
+>
+> Anyways, the exact choice of the power (the _exponent_, if we're being more
+> precise) is not set in stone, because there isn't an exact physical phenomena
+> we're trying to model. By providing this "Exponential response" option, VCV
+> Rack itself tries to model hardware modular gear which themselves try to model
+> musically relevant sounds, so there is not a right answer here, just what is
+> musically most useful in a generic enough manner.
+>
+> The VCA is often driven by ADSR module, which itself does not have exponential
+> responses for the individual phases of the envelope, and instead relies on the
+> VCA, so whatever choice of the exponent we make should not be too _aggressive_
+> lest it is unusable in the non-attack phases of the envelope.
+>
+> But we haven't seen the ADSR here, so this may be gobbledegook, and you can
+> safely ignore this aside.
+
+The function VCV itself uses is x<sup>4<sup>.
+
+![Quartic function](i/graph-6.png)
+
 
 ---
 
