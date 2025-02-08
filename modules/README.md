@@ -621,6 +621,21 @@ The function VCV itself uses is x<sup>4<sup>.
 
 ![Quartic function](i/graph-6.png)
 
+Trimming off the also rans, let us compare the normal VCA behaviour (linear,
+blue) and the VCA behaviour when the "Exponential response" option in the right
+click menu is turned on (x<sup>4</sup>, purple).
+
+![VCV VCA - Linear vs exponential response](i/graph-7.png)
+
+We can see that it rises slower (which it needs to do if we want to retain the
+full dynamic range instead of peaking at 1 too early), with almost nothing
+happening until the input is ~0.5V, and then suddenly starts to ramp up,
+reaching 1 at the same time as its default linear counterpart.
+
+The output for a particular input voltage will always be smaller (as compared to
+the default linear response) when the exponential response is enabled, but
+because of the sharper rise in the second half, the overall sound's rise will
+feel more, um, just to use the same adjective as the manual, _aggressive_.
 
 ---
 
