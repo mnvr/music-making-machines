@@ -415,7 +415,7 @@ With a control voltage of 0V being 0% level, and 10V being 100% level.
 
 Since we can use a voltage to control the amplification level of the output,
 this module is called a **voltage controlled amplifier** (or as friends call it,
-a VCO).
+a VCA).
 
 As a convenience, we still get the manual control if we wish in addition to the
 voltage controlled level. The input signal (the voltage at the input jack _IN_)
@@ -425,6 +425,14 @@ controlled level (the setting on the display), and the result is what gets set
 as the voltage of the output jack _OUT_.
 
 ![VCA output level can be set both manually and via the level control voltage at the same time](i/vca-4.png)
+
+> [!NOTE]
+>
+> When a cable is patched to the level input, the display indicates our manual
+> adjustments differently - they reduce the extent of the underlying level bars
+> themselves (the gray ones) so that the level input takes an increased
+> proportion of them. When the level input is saturated, both the gray and
+> yellow bars coincide.
 
 Note the that setup in our example is uncommon. We're sending a fixed voltage as
 the input to be modulated, while in practice this is going to be a varying audio
@@ -636,6 +644,31 @@ The output for a particular input voltage will always be smaller (as compared to
 the default linear response) when the exponential response is enabled, but
 because of the sharper rise in the second half, the overall sound's rise will
 feel more, um, just to use the same adjective as the manual, _aggressive_.
+
+#### Clamping
+
+What happens when the level input is out of "range"? Let's try that.
+
+![VCA with out of range level](i/vca-11.png)
+
+Each unpatched CV Mix input is normalized to 10 V. We turn fully use two of
+these by turning their levels to 100%. The output of CV Mix is thus 10V + 10V =
+20V, which we can see in the scope levels (`pp 0, max 20, min 20`), even though
+we can't see the actual input itself since it is out of the default range shown
+by the scope (we can twiddle with the _OFST 1_ knob to see it too if we wish).
+
+So the level (CV) input is well outside the usual range of 0V (0%) to 10V
+(100%). But the (signal) input is still passing through unchanged - we can see
+at the 5V pp for the yellow sine wave in the scope (which is exactly what the
+oscillator is producing).
+
+While this is utterly reasonable, it is a bit unexpected too. Something needs to
+be done about the possibility of the level input being out of the expected
+range, and clamping it is to the nominal range is utterly reasonable. The
+unexpectedness comes because no other module has done it so far.
+
+Indeed, the
+
 
 ---
 
