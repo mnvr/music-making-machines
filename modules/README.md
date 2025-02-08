@@ -662,6 +662,12 @@ So the level (CV) input is well outside the usual range of 0V (0%) to 10V
 at the 5V pp for the yellow sine wave in the scope (which is exactly what the
 oscillator is producing).
 
+We don't have to trust our experiments, the VCA manual mentions this:
+
+> With VCA, a signal passing through **IN** to **OUT** is attenuated based on
+> the **CV** input signal from 0% at 0V, to 100% at 10V. CV input is clamped,
+> meaning that negative CV or CV beyond 10V results in 0% and 100% attenuation, respectively.
+
 While this is utterly reasonable, it is a bit unexpected too. Something needs to
 be done about the possibility of the level input being out of the expected
 range, and clamping it is to the nominal range is utterly reasonable. The
@@ -687,6 +693,11 @@ mine):
 >
 > https://vcvrack.com/manual/VoltageStandards
 
+So why does the VCA do it? I can but only guess, and my guess is that an
+unbounded level range would've made the code and UI harder without satisfying a
+real use case; Also, while these are not real voltages, combining this with the
+exponential response mode and emitting fourth powers of the input would've very
+easily resulted in big numbers flowing around the patch.
 
 ---
 
