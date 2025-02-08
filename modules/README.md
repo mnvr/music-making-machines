@@ -699,6 +699,12 @@ real use case; Also, while these are not real voltages, combining this with the
 exponential response mode and emitting fourth powers of the input would've very
 easily resulted in big numbers flowing around the patch.
 
+On the other hand, since VCA does clamping, we get to use it as a pseudo-_Clamp_
+module if we must (just for illustration, wouldn't recommend using it this way
+for real).
+
+![VCA as a clamper](i/vca-clamp.png)
+
 ---
 
 <div align="right">
