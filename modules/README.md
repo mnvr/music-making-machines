@@ -240,11 +240,11 @@ Or to put it the other way around, CV Mix provides input level control unlike
 Mix which provides output level control; and CV Mix provides a single summed
 output unlike 8vert which provides 8 independent outputs.
 
-#### Why "CV"?
+#### Why "CV"??
 
 CV Mix also works with audio, despite its name. Or does it?
 
-If we patch an audio mix through it, and through a combination of 8vert and Mix,
+If we patch an audio mix through it, and through a combination of 8vert and Mix, but usually all we can say when someone
 we seem to get the same result (the _OFST1_ on the scope in the example is just
 to show that there really are two signals; without the offset they align
 perfectly).
@@ -495,6 +495,91 @@ intended) in the future.
 > What we need for such cases is an "envelope" generator, which is what would
 > control the VCA instead of the LFO in our examples so far. But we're getting
 > ahead of ourselves here...
+
+The VCA has one more trick up its ~~sleeve~~ right click menu. Exponential
+responses.
+
+#### Exponential?
+
+The word exponential is one of those things that everyone knows, but no one
+really knows what it exactly means in a particular context. Often, exponential
+is used as a stand in for quadratic (x<sup>2</sup>) or cubic (x<sup>2</sup>),
+and it is indeed infrequent for it to be used in a context where it matches its
+mathematical definition (e<sup>x</sup>).
+
+The most general statement we can deduce from such assertions about exponential
+behaviour is that it is _not linear_.
+
+The same is happening here. The exponential response is VCV Rack is not
+e<sup>x</sup>, but is x<sup>4</sup>. For musical purposes, what we need to know
+is that this is more, to quote the manual, "aggressive".
+
+The scope shows what we mean (compare it to the normal output above).
+
+![VCA with exponential response](i/vca-9.png)
+
+And it is even easier to here if one patches the _OUT 2_ of the scope to an
+Audio. Why, we can do both simultaneously, since we have stereo outputs on our
+laptop and stereo inputs via our ears.
+
+![Contrasting two VCAs with and without exponential response](i/vca-10.png)
+
+Notice how the yellow bar in the VCA display is lower for the second VCA (an
+asymmetry that carries forward to the VU meter LEDs of the Audio). This is a
+screenshot of an arbitrary point in time, but no matter when you take the
+screenshot, the second VCA's instantaneous level (which is what the yellow bar
+on the display indicates) will always be less than or equal to the first one's.
+
+This is just a property of the mathematical function that was chosen. Before
+getting to the specific choice, let us reflect on the motivations.
+
+Here is a linear function.
+
+![Linear function](i/graph-1.png)
+
+Many real life phenomena exhibit non-linear behavior. You don't get richer when
+you get richer, you also start getting richer faster. So the graph of wealth vs
+money added is not a straight line, it tends to grow faster the more money you
+already have. Same happens with knowledge, popularity or even downfall.
+
+Pertinent to us is that the envelopes of many natural sounds we hear also behave
+similarly. _They don't behave linearly_.
+
+They don't behave exactly exponentially either (whatever exponentially means).
+Modelling the envelopes of sound is not a one trick pony; sounds have different
+phases, each of which might be best modelled by a different type of a function,
+including linear ones.
+
+But that caveat aside, making the level of a sound rise exponentially is an easy
+way to make them sound more natural or musically appropriate in certain contexts
+(e.g. kick sounds). Linear just sounds too _slow_; this might have to do with
+how we ourselves respond exponentially (using our wavy hand wavy definition) to
+volume - if we were to correlate the volume to say, the max level of the
+voltage, then the voltage needs to increase 3.1 times for us to feel it as twice
+as loud.
+
+That's why the unit of audio levels is dB (decibels), but I feel I'm going on a
+tangent to a tangent here, so will stop at that. What do we know is - (a) linear
+is not always enough to model increases in the level of a sound, and (b)a more
+"spiky" increase sometimes sounds more natural. So the question then is - which
+"spikier" function should we use.
+
+Let us first try with a literal definition of an exponential function,
+e<sup>x</sup>.
+
+![Linear and exponential function](i/graph-2.png)
+
+This doesn't work, at least not directly. Anything to the power of 0 is 1, so is
+e<sup>0</sup>, and for a zero input we're already getting output 1, and after
+that it'll start getting out of range.
+
+> We've not defined our range explicitly, so let's make mention that. Our inputs
+> will we values between 0 and 1. Our outputs will be values between 0 and 1.
+> The task of our VCA then is to map the input (0V to 1V) to the output (0V to
+> 1V).
+
+This problem will be with any function of the form a<sup>x</sup>, so let us try
+the other way - x<sup>a</sup>. Let's take the quadratic function.
 
 ---
 
