@@ -4,10 +4,10 @@ Notes about making Music Making Machines.
 
 <img src="assets/i/icon-rounded.png" width="128">
 
-The specific software used is freely available and open source VCV Rack using
-stock plugins. The same techniques can be used in any medium that allows basic
-but direct manipulation of signals (modular hardware, other visual patching
-softwares, music programming languages etc).
+The specific software used is the freely available and open source VCV Rack, and
+using only its stock modules. The same techniques can be used in any medium that
+allows basic but direct manipulation of signals (modular hardware, other visual
+patching softwares, music programming languages etc).
 
 ## Meta
 
@@ -54,8 +54,8 @@ sit.
 
 Reference: [VCV Rack Manual](https://vcvrack.com/manual/)
 
-Here are [some more notes](rack/README.md) you might find useful, and below are
-two koans.
+[Here are some more notes](rack/README.md) you might find useful, and below are
+two koans: _signals are voltages_, and _patches are text_.
 
 ### All signals are voltages
 
