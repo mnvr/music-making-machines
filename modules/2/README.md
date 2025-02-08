@@ -27,6 +27,14 @@ your speakers. Might be useful.
 > Actually, there is another core module that we've been using all along, to
 > scribble our graffiti on. Notes!
 
+The (virtual) voltages travelling in the cables between modules in Rack can be
+anything a float can hold (~±10<sup>38</sup> in magnitude though not in
+precision), but individual modules can (and sometimes do) choose to clip their
+inputs or outputs.
+
+In particular, Audio clamps the values it gets to lie between ±10V, and then
+rescales them them to ±1 before sending them out to device.
+
 ## Poly
 
 So far we've talked of voltages as real numbers carried by a cables, but cables
