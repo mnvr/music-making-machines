@@ -667,7 +667,25 @@ be done about the possibility of the level input being out of the expected
 range, and clamping it is to the nominal range is utterly reasonable. The
 unexpectedness comes because no other module has done it so far.
 
-Indeed, the
+Indeed, the developer guide for plugin authors recommends not clamping (emphasis
+mine):
+
+> #### Output Saturation
+>
+> In Eurorack, power supplies supply -12 to 12 V. No voltage should be generated
+> beyond this range, since it would be mostly impossible to obtain in Eurorack...
+>
+> However, if you do not want to model analog output saturation for simplicity
+> or performance reasons, that is perfectly fine. It is much better to allow
+> voltages outside this range than use hard clipping with `clamp(out, -1.f,
+> 1.f)` because in the best case they will be attenuated by a module downstream,
+> and in the worst case, they will be hard clipped by the Audio module from
+> Core.
+>
+> *If your module is capable of applying >1x gain to an input, it is a good idea
+> to saturate the output.*
+>
+> https://vcvrack.com/manual/VoltageStandards
 
 
 ---
