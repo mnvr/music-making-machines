@@ -705,6 +705,37 @@ for real).
 
 ![VCA as a clamper](i/vca-clamp.png)
 
+#### The source
+
+After expending thousands of words on the VCA, it'd be a miss to not also look
+at [its
+source](https://github.com/VCVRack/Fundamental/blob/d1c9f6f1fe7e2f2f1fa85cf2da3ac798b86ed2de/src/VCA-1.cpp#L41-L58)
+and revel in its succinct clarity.
+
+```c++
+float level = params[LEVEL_PARAM].getValue();
+float in = inputs[IN_INPUT].getVoltage();
+
+const gain = level;
+if (inputs[CV_INPUT].isConnected()) {
+    float cv = clamp(inputs[CV_INPUT].getVoltage(c) / 10, 0, 1);
+    if (params[EXP_PARAM].getValue())
+        cv = pow(cv, 4);
+    gain *= cv;
+}
+
+in *= gain;
+
+outputs[OUT_OUTPUT].setVoltage(in);
+```
+
+This is the kind of simplicity that is self evident when looking at it ("how
+could it be any other way"), but is not obvious when deriving it from scratch,
+and often can only be arrived at via the lathe of complexity. Even in this
+specific case, the code for the [first "final"
+iteration](https://github.com/VCVRack/Fundamental/blob/d1c9f6f1fe7e2f2f1fa85cf2da3ac798b86ed2de/src/VCA.cpp#L45-L101)
+of the VCA was not as straightforward.
+
 ---
 
 <div align="right">
