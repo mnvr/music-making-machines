@@ -168,6 +168,22 @@ There are many oscillators (we'll come to noise later), and the distinctions
 between them, while important, are just the 2%. By focusing on the distinctions
 too early, we risk not paying attention to the 98% of them which is the same.
 
+An oscillator produces a repeating waveform. The canonical repeating waveform is
+a sine wave.
+
+![VCO producing a sine wave](i/vco-0.png)
+
+By default, the sine wave repeats 261.6256 times per second. Why such an oddly
+specific number? When something repeats this many times per second, it is by
+convention called as a pitch C, specifically, C4 (the "middle" C on the piano,
+or the 5th fret on the fourth string from the top of the guitar).
+
+> [!TIP]
+>
+> Don't worry about it or what it means too much. Something had to be made the
+> default, and this is just a convenient choice.
+
+
 ---
 
 [← Part 1](../)

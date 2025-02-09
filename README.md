@@ -120,7 +120,7 @@ or **±5V** (bipolar CV; LFO emits this when OFST switch is off).
 
 #### Pitches and frequencies
 
-Frequency knobs on VCO typically default to C4 (middle C, MIDI 60, `f0 =
+Frequency knobs on VCOs typically default to C4 (middle C, MIDI 60, `f0 =
 261.6256 Hz`). This can be offset by an input voltage V which would use the 1
 V/oct (volt-per-octave) standard for CV control of frequency information. Thus
 the offset frequency in terms of the input voltage V would be `f = f0 * 2 ^ V`,
