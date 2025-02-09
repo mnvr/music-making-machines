@@ -132,7 +132,7 @@ used to from the real world.
 >
 > If you want to set them to exact values, you can use the `gaintodb(x)`
 > function to convert a gain to its dB equivalent. You can enter it directly in
-> the input area that appears on right clicking the fader or knob.
+> the text field that appears on right clicking the fader or knob.
 >
 > ![Illustrating gaintodb](i/gaintodb.png)
 
@@ -182,6 +182,20 @@ or the 5th fret on the fourth string from the top of the guitar).
 >
 > Don't worry about it or what it means too much. Something had to be made the
 > default, and this is just a convenient choice.
+
+Repeating 261.6256 times per second means that each repetition will take 1 /
+261.6256 seconds, or ~3.8 milliseconds. The smallest time resolution for the
+scope is 5 milliseconds, so if we set the scope _TIME_ to 2 * 1000 / c4, or ~
+7.6 milliseconds, we should be able to see two cycles of the sine wave pass
+through.
+
+> [!TIP]
+>
+> We can directly enter that expression in the text field on the parameter right
+> click context menu for the _TIME_ knob on Scope.
+>
+> ![Entering an expression direction in the parameter context menu](i/expression.png)
+
 
 
 ---
