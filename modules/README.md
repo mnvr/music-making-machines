@@ -159,10 +159,9 @@ It allows us to multiply a voltage by -1 (Right click, "invert output").
 
 ![Mix allows setting the output LEVEL](i/mix-4.png)
 
-Not
-sure how this new operator (`f(x) = x * -1`) adds to our Peano arithmetic, but when
-applied to a control voltage, this will reverse its effect, while for an audio
-signal, it will invert its phase.
+Not sure how this new operator (`f(x) = x * -1`) adds to our Peano arithmetic,
+but when applied to a control voltage, this will reverse its effect, while for
+an audio signal, it will invert its phase.
 
 In the last sentence, notice the different semantic effect multiplying by -1 has
 on the voltage. The code is literally [multiplying by
@@ -191,7 +190,7 @@ isn't doing something we already cannot, right?
 > all these give rise to modules that are not "one way to do things" building
 > blocks but chimeras with overlap in functionality.
 
-Turns out, Mix does have a new trick up its sleeve - it allows averaging the
+Turns out, Mix does have a unique functionality - it allows averaging the
 inputs.
 
 ![Mix has an option to average voltages at the outputs](i/mix-5.png)
@@ -231,8 +230,10 @@ itself and all the inputs below, so the (second) output is also 1V.
 > different 8vert and CV Mix laddering](i/cv-mix-3.png)
 
 So CV Mix is like Mix in that it sums its inputs, but also like 8vert in that it
-allows us to "attenuvert" (attenuate and/or invert) the inputs before they get
-summed, and like 8vert also provides a default value 10V for unpatched inputs.
+allows us to "attenuvert" (*attenu*ate and/or in*vert* by allowing the gain to
+range between -1 and 1 mathematically, and -100% and 100% on the display) the
+inputs before they get summed, and like 8vert also provides a default value 10V
+for unpatched inputs.
 
 ![8vert, CV Mix and Mix next to each other for easy comparison](i/cv-mix-4.png)
 
@@ -244,23 +245,26 @@ output unlike 8vert which provides 8 independent outputs.
 
 CV Mix also works with audio, despite its name. Or does it?
 
-If we patch an audio mix through it, and through a combination of 8vert and Mix, but usually all we can say when someone
-we seem to get the same result (the _OFST1_ on the scope in the example is just
-to show that there really are two signals; without the offset they align
-perfectly).
+If we patch an audio mix through it, and through a combination of 8vert and Mix,
+but usually all we can say when someone we seem to get the same result (the
+_OFST1_ on the scope in the example is just to show that there really are two
+signals; without the offset they align perfectly).
 
 ![The same signals, mixed via a combination of 8vert and Mix, and also via CV
 Mix](i/cv-mix-5.png)
 
 Let us see if we can spot a difference in the code. This is
-[Mix](https://github.com/VCVRack/Fundamental/blob/d1c9f6f1fe7e2f2f1fa85cf2da3ac798b86ed2de/src/CVMix.cpp#L47-L59):
+[Mix](https://github.com/VCVRack/Fundamental/blob/d1c9f6f1fe7e2f2f1fa85cf2da3ac798b86ed2de/src/Mixer.cpp#L45-L70):
 
 ```c++
+float gain = params[LEVEL_PARAM].getValue();
+if (invert) gain *= -1;
+if (average) gain /= max(1, connected);
 float out = 0.f;
 for (int i = 0; i < 6; i++) {
     out += inputs[IN_INPUTS + i].getVoltageSimd(c);
 }
-out *= params[LEVEL_PARAM].getValue();
+out *= gain;
 outputs[OUT_OUTPUT].setVoltage(out, 0);
 ```
 
@@ -283,7 +287,9 @@ outputs[OUT_OUTPUT].setVoltageSimd(out, 0);
 There are some surface level differences – Mix has 6 inputs while CV Mix has 3 –
 and some differences due to the module's interfaces – Mix has one gain control
 and so the multiplication with the gain happens outside the loop, while CV Mix
-has one gain control for each input so the multiplication happens inside.
+has one gain control for each input so the multiplication happens inside; Mix
+uses a flag to control inverting, while CV Mix provides a knob that ranges
+between -100% and 100%, allowing for direct inversion.
 
 There is also the difference in the function used to read the value - Mix uses
 `getVoltageSimd`, while CV Mix uses `getNormalVoltageSimd`, which is defined as:
@@ -366,7 +372,7 @@ signal path introduces a 1 sample delay!
 > time if the number of cables in each signal's chain is different.
 >
 > [VCV Rack Manual / Voltage Standards /
->   Timing]((https://vcvrack.com/manual/VoltageStandards#Timing))
+>   Timing](https://vcvrack.com/manual/VoltageStandards#Timing)
 
 In our case, the 8vert + mix combination has 1 extra cable in the signal path as
 compared to going via CV Mix, so there is an extra sample delay, which manifests
@@ -392,14 +398,14 @@ The VCA is like a volume knob.
 
 ![VCA can attentuate the level of an input](i/vca-1.png)
 
-Except instead of turning it by hand, you can get a (control) voltage to do it
-for you.
+Except instead of just turning it by hand, you can also get a (control) voltage
+to do it for you.
 
-![VCA level can be controlled by a control voltage](i/vca-2.png)
+![VCA gain can be controlled by a control voltage](i/vca-2.png)
 
-With a control voltage of 0V being 0% level, and 10V being 100% level.
+With a control voltage of 0V being 0% gain, and 10V being 100% gain.
 
-![VCA output vs the level control voltage](i/vca-3.png)
+![VCA output vs the gain control voltage](i/vca-3.png)
 
 > [!NOTE]
 >
@@ -413,26 +419,26 @@ With a control voltage of 0V being 0% level, and 10V being 100% level.
 > functional reasons for using CV Mix for control voltages and VCA (or VCA Mix)
 > for audio voltages.
 
-Since we can use a voltage to control the amplification level of the output,
-this module is called a **voltage controlled amplifier** (or as friends call it,
-a VCA).
+Since we can use a voltage to control the amplification of the output, this
+module is called a **voltage controlled amplifier** (or as friends call it, a
+VCA).
 
-As a convenience, we still get the manual control if we wish in addition to the
-voltage controlled level. The input signal (the voltage at the input jack _IN_)
-is multiplied by the voltage controlled level (the control voltage at unnamed
-jack below the level on the display), and then multiplied by the manually
-controlled level (the setting on the display), and the result is what gets set
-as the voltage of the output jack _OUT_.
+As a convenience, we also get a manual level control if we wish in addition to
+the voltage controlled gain. The input signal (the voltage at the input jack
+_IN_) is multiplied by the voltage controlled gain (the control voltage at
+unnamed jack below the level on the display), and then multiplied by the
+manually controlled level (the setting on the display), and the result is what
+gets set as the voltage of the output jack _OUT_.
 
-![VCA output level can be set both manually and via the level control voltage at the same time](i/vca-4.png)
+![VCA output amplification can be set both manually and using a control voltage at the same time](i/vca-4.png)
 
 > [!NOTE]
 >
-> When a cable is patched to the level input, the display indicates our manual
-> adjustments differently - they reduce the extent of the underlying level bars
-> themselves (the gray ones) so that the level input takes an increased
-> proportion of them. When the level input is saturated, both the gray and
-> yellow bars coincide.
+> When a cable is patched to the unnamed gain CV input, the display indicates
+> our manual adjustments differently - they reduce the extent of the underlying
+> level bars themselves (the gray ones) so that the level input takes an
+> increased proportion of them. When the level input is saturated, both the gray
+> and yellow bars coincide.
 
 Note the that setup in our example is uncommon. We're sending a fixed voltage as
 the input to be modulated, while in practice this is going to be a varying audio
@@ -443,8 +449,8 @@ voltage (e.g. the output of an oscillator).
 In fact, just for illustration purposes, it might be useful to flip the order in
 which the modules are arranged in our rack, to put the modulation signal (the
 LFO) first. This has no functional impact, but it does give us a glimpse of how
-for a VCA the "input" signal is always on, it is the modulation (the amount of
-it that goes through) that is being controlled.
+for a VCA the "input" signal is always on, it is the gain (the amount of it that
+goes through) that is being "played".
 
 ![VCA inputs arranged in a sometimes more natural to understand order](i/vca-6.png)
 
@@ -494,11 +500,11 @@ intended) in the future.
 > the modulation voltage is coming from a slow moving LFO, but often times is a
 > one shot thing.
 >
-> Taking the guitar example we were talking about a while ago - a guitar note
-> does not keep playing indefinitely, nor does it loop on and off. Instead what
-> happens is that we pluck it, and the note plays for a while, and then stops.
-> If we want similar type of behaviour in our music making machines (and we do),
-> then a LFO as a modulation voltage won't work.
+> Taking the guitar example again - a guitar note does not keep playing
+> indefinitely, nor does it loop on and off. Instead what happens is that we
+> pluck it, and the note plays for a while, and then stops. If we want similar
+> type of behaviour in our music making machines (and we do), then a LFO as a
+> modulation voltage won't work.
 >
 > What we need for such cases is an "envelope" generator, which is what would
 > control the VCA instead of the LFO in our examples so far. But we're getting
@@ -564,16 +570,17 @@ way to make them sound more natural or musically appropriate in certain contexts
 
 > [!TIP]
 >
-> This might have to do with how we ourselves respond exponentially (using our
-> wavy hand wavy definition) to volume - if we were to correlate the volume to
-> say, the max level of the voltage, then the voltage needs to increase 3.1
-> times or us to feel it as twice as loud.
+> This might have to do with how we ourselves respond exponentially
+> (logarithmically, but we're anyways using our hand wavy definition where we
+> bucket everything _non-linear_ as exponential) to volume - if we were to
+> correlate the volume to say the max level of the voltage, then the voltage
+> needs to increase 3.1 times or us to feel it as twice as loud.
 >
 > That's why the unit of audio levels is dB (decibels), but I feel I'm going on
 > a tangent to a tangent here, so will stop at that.
 
 What do we know is - (a) linear is not always enough to model increases in the
-level of a sound, and (b)a more "spiky" increase sometimes sounds more natural.
+level of a sound, and (b) a more "spiky" increase sometimes sounds more natural.
 So the question then is - which "spikier" function should we use.
 
 Let us first try with a literal definition of an exponential function,
@@ -657,29 +664,29 @@ these by turning their levels to 100%. The output of CV Mix is thus 10V + 10V =
 we can't see the actual input itself since it is out of the default range shown
 by the scope (we can twiddle with the _OFST 1_ knob to see it too if we wish).
 
-So the level (CV) input is well outside the usual range of 0V (0%) to 10V
-(100%). But the (signal) input is still passing through unchanged - we can see
-at the 5V pp for the yellow sine wave in the scope (which is exactly what the
-oscillator is producing).
+So the gain (CV) input is well outside the usual range of 0V (0%) to 10V (100%).
+But the (signal) input is still passing through unchanged - we can see at the 5V
+pp (peak-to-peak) for the yellow sine wave in the scope (which is exactly what
+the oscillator is producing).
 
 We don't have to trust our experiments, the VCA manual mentions this:
 
-> With VCA, a signal passing through **IN** to **OUT** is attenuated based on
-> the **CV** input signal from 0% at 0V, to 100% at 10V. CV input is clamped,
-> meaning that negative CV or CV beyond 10V results in 0% and 100% attenuation, respectively.
+> With VCA, a signal passing through *IN* to *OUT* is attenuated based on the
+> *CV* input signal from 0% at 0V, to 100% at 10V. CV input is clamped, meaning
+> that negative CV or CV beyond 10V results in 0% and 100% attenuation,
+> respectively.
 
 While this is utterly reasonable, it is a bit unexpected too. Something needs to
 be done about the possibility of the level input being out of the expected
-range, and clamping it is to the nominal range is utterly reasonable. The
-unexpectedness comes because no other module has done it so far.
+range, and clamping it is to the nominal range is reasonable. The unexpectedness
+comes because no other module has done it so far.
 
 Indeed, the developer guide for plugin authors recommends not clamping (emphasis
 mine):
 
-> #### Output Saturation
->
 > In Eurorack, power supplies supply -12 to 12 V. No voltage should be generated
-> beyond this range, since it would be mostly impossible to obtain in Eurorack...
+> beyond this range, since it would be mostly impossible to obtain in
+> Eurorack...
 >
 > However, if you do not want to model analog output saturation for simplicity
 > or performance reasons, that is perfectly fine. It is much better to allow
@@ -691,7 +698,8 @@ mine):
 > *If your module is capable of applying >1x gain to an input, it is a good idea
 > to saturate the output.*
 >
-> https://vcvrack.com/manual/VoltageStandards
+> [VCV Rack Manual / Voltage Standards /
+>   Output Saturation](https://vcvrack.com/manual/VoltageStandards#Output-Saturation)
 
 So why does the VCA do it? I can but only guess, and my guess is that an
 unbounded level range would've made the code and UI harder without satisfying a
