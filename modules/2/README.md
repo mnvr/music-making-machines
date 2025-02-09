@@ -2,7 +2,7 @@
 
 # M for Modules
 
-[Audio](#audio) • [Poly](#poly) • [VCA Mix](#vca-mix)
+[Audio](#audio) • [Poly](#poly) • [VCA Mix](#vca-mix) • [VCO](#vco)
 
 ## Audio
 
@@ -135,6 +135,38 @@ used to from the real world.
 > the input area that appears on right clicking the fader or knob.
 >
 > ![Illustrating gaintodb](i/gaintodb.png)
+
+## VCO
+
+Eventually, after doing all the maths and whatnot, what want our music making
+machine to do make music, and half of music is sound.
+
+> [!TIP]
+>
+> The other half is silence.
+
+So we need to make sounds. There are only two ways to generate a sound in Rack
+(if we restrict ourselves to the stock modules) - Using an oscillator, and using
+noise.
+
+> [!TIP]
+>
+> This might not seem much, these two cover the entire gamut of phenomena:
+>
+> - Repeating the same thing again and again - an oscillator;
+> - Never repeating the same thing again - noise.
+>
+> The music in modular setups arises not from the richness of sound sources but
+> from the way that everything is modulatable, including the modulators (these
+> two primitives).
+>
+> Usually, we want something in the middle of these two extremes - repeating
+> something in "musical" variations - and that ability is provided by a
+> sequencer which we'll come to in due time.
+
+There are many oscillators (we'll come to noise later), and the distinctions
+between them, while important, are just the 2%. By focusing on the distinctions
+too early, we risk not paying attention to the 98% of them which is the same.
 
 ---
 
