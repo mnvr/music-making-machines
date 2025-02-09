@@ -68,12 +68,64 @@ a different direction too:
 * CV Mix was for mixing 3 signals, with only a manual control for their respective
   input levels.
 
-* VCA Mix is the granddaddy. It can unity mix 4 signals, with manual _and_ CV
-  controllable control for their respective input levels, outputs for the
-  respective 4 signals after this gain stage, a manual and CV controllable
-  control for the output level, and the output after the mix.
+* VCA Mix is the granddaddy. It can unity mix 4 signals, with manual level
+  control _and_ CV controllable gain for each input, outputs for the 4 signals
+  after this gain staging, a manual level control and CV controllable gain
+  control for the output, and the output after the mix.
 
 ![Mix, CV Mix and VCA Mix](i/vca-mix-1.png)
+
+> [!TIP]
+>
+> Another way to think of the VCA Mix is as collection of _five_ VCAs. Four
+> VCAs, one per input, summed together by an internal mixer, and then put
+> through the output VCA.
+
+Since is part of both the mixer family and the audio family, the terminology on
+its panel is also different from the CV-ish modules we've seen so far.
+
+* The four inputs (_IN 1_, _IN 2_, _IN 3_ and _IN 4_), after being multiplied by
+  the corresponding manual level and gain input (_CV N_), are named as
+  "channels" (_CH N_).
+
+* The CV (gain) input ranges are the same as the VCA - 0 (0%) to 10V (100%) -
+  but the manual level knobs both labelled differently, and have more range.
+
+![VCA Mix 2x at 6dB](i/vca-mix-2.png)
+
+Here are the markings translated to their numeric multiplier:
+
+| Label (dB) | Gain (multiplier) |
+|------------|-------------------|
+| -∞         | 0                 |
+| 0          | 1                 |
+| 6          | 2                 |
+
+The markings alongside the faders also work as one would expect. For example,
+placing the fader roughly at the halfway marker between 0 dB and 6 dB gives us a
+gain of 1.5x.
+
+![VCA Mix 2x at 6dB](i/vca-mix-3.png)
+
+If you don't understand decibels etc, do not worry, it is not going to get in
+your way. The CV (gain) inputs still behave like plain VCA.
+
+![VCA Mix gains](i/vca-mix-4.png)
+
+The level faders and mix knob using the dB scale is likely because the VCA is
+meant for audio voltages, where the dB scale better matches our perception of
+"volume" / loudness. In most cases, and unlike the CV inputs, these faders will
+be adjusted by "ear", so you wouldn't need to know what the numbers are or mean,
+and by using a dB scale they'll behave similar to the volume knobs you might be
+used to from the real world.
+
+> [!TIP]
+>
+> If you want to set them to exact values, you can use the `gaintodb(x)`
+> function to convert a gain to its dB equivalent. You can enter it directly in
+> the input area that appears on right clicking the fader or knob.
+>
+> ![Illustrating gaintodb](i/gaintodb.png)
 
 ---
 
