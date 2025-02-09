@@ -80,9 +80,18 @@ a different direction too:
 > Another way to think of the VCA Mix is as collection of _five_ VCAs. Four
 > VCAs, one per input, summed together by an internal mixer, and then put
 > through the output VCA.
+>
+> All these five VCAs expose all the functionality that the hypothetical
+> individual VCA would've, including the ability to toggle the "Exponential
+> response" modes. The right click menu for the VCA Mix allows enabling this
+> exponential response mode for all four input VCAs ("Exponential channel VCAs")
+> simultaneously, and / or for the output VCA ("Exponential mix VCA").
+>
+> ![Controlling exponential response for the VCAs in VCA Mix](i/vca-mix-exp.png)
 
-Since is part of both the mixer family and the audio family, the terminology on
-its panel is also different from the CV-ish modules we've seen so far.
+Since VCA Mix part of both the mixer family and the audio family, the
+terminology on its panel is also different from the CV-ish modules we've seen so
+far.
 
 * The four inputs (_IN 1_, _IN 2_, _IN 3_ and _IN 4_), after being multiplied by
   the corresponding manual level and gain input (_CV N_), are named as
